@@ -4,14 +4,14 @@ from core.group.group_post.models import GroupPostModel
 
 
 class GroupCommentModel(models.Model):
-    TYPE_COMMENT = {
-        'T': 'text',
-        'I': 'image',
-        'V': 'video',
-        'A': 'audio'
-    }
+    TYPE_COMMENT = (
+        ('T', 'text'),
+        ('I', 'image'),
+        ('V', 'video'),
+        ('A', 'audio')
+    )
     id = models.BigAutoField(db_column='id', primary_key=True)
-    postComment = models.CharField(db_column='postComment', blank=True, choices=TYPE_COMMENT)
+    postComment = models.CharField(db_column='postComment', blank=True, choices=TYPE_COMMENT, max_length=10)
     groupId = models.ForeignKey(GroupPostModel,  on_delete=models.CASCADE)
     userId = models.IntegerField(db_column='userId', blank=True, default='')
     commentId = models.IntegerField(db_column='commentId', blank=True, default='hello')

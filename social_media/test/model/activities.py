@@ -17,5 +17,6 @@ activity = ActivitiesModel(
     createdAt='2016-03-09T03:30:25.1263499Z',
     updatedAt='2016-03-09T03:30:25.1263499Z',
 )
-# activity.save()
+# activity.save(using="master")
+
 

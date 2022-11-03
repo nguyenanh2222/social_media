@@ -6,22 +6,22 @@ from core.group.models import GroupModel
 
 
 class GroupMemberModel(models.Model):
-    NOTES = {
-        1: 'edited',
-        2: 'not changed'
-    }
-    STATUS = {
-        1: 'admin',
-        2: 'member',
-        3: 'accepting'
-    }
+    NOTES = (
+        (1, 'edited'),
+        (2, 'not changed')
+    )
+    STATUS = (
+        (1, 'admin'),
+        (2, 'member'),
+        (3, 'accepting')
+    )
     id = models.BigAutoField(db_column='id', primary_key=True)
     groupId = models.IntegerField(db_column='groupId', blank=False)
     userId = models.IntegerField(db_column='userId', blank=False)
     createdAt = models.DateTimeField(db_column='createdAt', default=datetime.now, blank=True, editable=False)
     updatedAt = models.DateTimeField(db_column='updatedAt', default=datetime.now, blank=True, editable=False)
-    status = models.CharField(db_column='status', blank=True, choices=STATUS)
-    notes = models.CharField(db_column='notes', blank=True, choices=NOTES)
+    status = models.CharField(db_column='status', blank=True, choices=STATUS, max_length=10)
+    notes = models.CharField(db_column='notes', blank=True, choices=NOTES, max_length=10)
 
     class Meta:
         db_table = 'GROUP_MEMBER'

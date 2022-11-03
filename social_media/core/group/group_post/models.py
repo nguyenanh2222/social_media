@@ -4,17 +4,17 @@ import manage
 
 
 class GroupPostModel(models.Model):
-    TYPE_POST = {
-        'T': 'text',
-        'I': 'image',
-        'V': 'video',
-        'A': 'audio'
-    }
+    TYPE_POST = (
+        ('T', 'text'),
+        ('I', 'image'),
+        ('V', 'video'),
+        ('A', 'audio')
+    )
     id = models.BigAutoField(db_column='id', primary_key=True)
     groupId = models.IntegerField(db_column='groupId', blank=True, default='')
     userId = models.IntegerField(db_column='userId', blank=True, default='')
     caption = models.TextField(db_column='caption', blank=True, default='')
-    postType = models.CharField(db_column='postType', blank=True, choices=TYPE_POST)
+    postType = models.CharField(db_column='postType', blank=True, choices=TYPE_POST, max_length=10)
     numberLike = models.IntegerField(db_column='numberLike', blank=True, default=None)
     commentId = models.IntegerField(db_column='commentId', blank=True, default='hello')
     createdAt = models.DateTimeField(db_column='createdAt', default=datetime.now, blank=True, editable=False)
