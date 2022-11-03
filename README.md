@@ -35,6 +35,9 @@ SOCIAL_MEDIA API
 ## Run
 command terminal: python3 manage.py runserver
 
+## API design
+* get list user: http://127.0.0.1:8000/api/users/
+
 
 
 
