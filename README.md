@@ -37,7 +37,8 @@ command terminal: python3 manage.py runserver
 
 ## API design
 * get list user: http://127.0.0.1:8000/api/users/
-
+* login: http://127.0.0.1:8000/login/
+* refesh token: http://127.0.0.1:8000/refresh-token/
 
 
 
