@@ -22,6 +22,12 @@ class UserModel(AbstractBaseUser):
     is_reported = models.BooleanField(db_column='is_reported', default=0, blank=True)
     is_blocked = models.BooleanField(db_column='is_blocked', default=0, blank=True)
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
+    # objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
 
     class Meta:
         db_table = 'USER'

@@ -5,8 +5,8 @@ from core.group.models import GroupModel
 
 class GroupFollowingModel(models.Model):
     id = models.BigAutoField(db_column='id', primary_key=True)
-    sourceId = models.ForeignKey(GroupModel, db_column='sourceId', on_delete=models.CASCADE, blank=False, related_name="source_id")
-    targetId = models.ForeignKey(GroupModel,   db_column='targetId', on_delete=models.CASCADE, blank=False, related_name="target_id")
+    sourceId = models.ForeignKey(GroupModel, db_column='sourceId', on_delete=models.CASCADE, blank=False, related_name="source_group_id")
+    targetId = models.ForeignKey(GroupModel,   db_column='targetId', on_delete=models.CASCADE, blank=False, related_name="target_group_id")
     createdAt = models.DateTimeField(db_column='createdAt', default=datetime.now, blank=True, editable=False)
 
     class Meta:

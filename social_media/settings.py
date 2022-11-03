@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-7o4xyy$+i%303zaz2&2%b2i5q^!$#!h#$+yj)j#aqqt7&#%s@5
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['api.local', '.api.local']
 
 # Application definition
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'core',
     'api'
 ]
@@ -91,7 +93,7 @@ MIDDLEWARE = [
 ]
 DATABASE_ROUTERS = ['api.router.ApiRouter']
 
-# ALLOWED_HOSTS = ['api.local', '.api.local']
+
 
 ROOT_URLCONF = 'social_media.urls'
 
@@ -112,14 +114,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'social_media.wsgi.application'
-# AUTH_USER_MODEL = "core.UserModel"
+AUTH_USER_MODEL = "core.UserModel"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {},
-    'master': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SOCIAL_MEDIA',
         'USER': 'sa',

@@ -21,7 +21,7 @@ class GroupMessengerModel(models.Model):
     message = models.CharField(db_column='message', max_length=50, blank=True, default='hello')
 
     class Meta:
-        db_table = 'USER_MESSENGER'
+        db_table = 'GROUP_MESSENGER'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),
