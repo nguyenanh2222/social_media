@@ -1,5 +1,4 @@
 from datetime import datetime
-from importlib.resources import _
 
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin

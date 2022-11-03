@@ -1,16 +1,12 @@
 from datetime import datetime
-from importlib.resources import _
 
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-
-import manage
 
 
 class UserModel(AbstractBaseUser):
-    password = models.CharField(_('password'), max_length=128)
-    last_login = models.DateTimeField(_('last login'), blank=True, null=True)
+    password = models.CharField(db_column='password', max_length=128)
+    last_login = models.DateTimeField(db_column='last_login', blank=True, null=True)
     id = models.BigAutoField(db_column='id', primary_key=True)
     uuid = models.CharField(db_column='uuid', max_length=26, blank=False)
     firstName = models.CharField(db_column='firstName', max_length=50, blank=True, default='hello')
