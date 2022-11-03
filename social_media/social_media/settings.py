@@ -87,11 +87,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
-    'api.middleware.ApiMiddleware',
+    # 'api.middleware.ApiMiddleware',
 ]
 DATABASE_ROUTERS = ['api.router.ApiRouter']
 
-ALLOWED_HOSTS = ['api.local', '.api.local']
+# ALLOWED_HOSTS = ['api.local', '.api.local']
 
 ROOT_URLCONF = 'social_media.urls'
 
