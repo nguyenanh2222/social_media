@@ -24,7 +24,7 @@ class GroupMemberModel(models.Model):
     notes = models.CharField(db_column='notes', blank=True, choices=NOTES)
 
     class Meta:
-        db_table = 'GROUP_MEMBER',
+        db_table = 'GROUP_MEMBER'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

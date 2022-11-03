@@ -14,7 +14,7 @@ class GroupLikeModel(models.Model):
     updatedAt = models.DateTimeField(db_column='updatedAt', default=datetime.now, blank=True, editable=False)
 
     class Meta:
-        db_table = 'GROUP_LIKE',
+        db_table = 'GROUP_LIKE'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

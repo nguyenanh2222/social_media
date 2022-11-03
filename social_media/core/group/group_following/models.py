@@ -10,7 +10,7 @@ class GroupFollowingModel(models.Model):
     createdAt = models.DateTimeField(db_column='createdAt', default=datetime.now, blank=True, editable=False)
 
     class Meta:
-        db_table = 'GROUP_FOLLOWING',
+        db_table = 'GROUP_FOLLOWING'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

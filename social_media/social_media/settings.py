@@ -129,7 +129,7 @@ DATABASES = {
     },
     'slave':{
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SOCIAL_MEDIA',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'example',
         'HOST': 'localhost',

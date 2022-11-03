@@ -28,7 +28,7 @@ class UserModel(AbstractBaseUser):
     USERNAME_FIELD = 'username'
 
     class Meta:
-        db_table = 'USER',
+        db_table = 'USER'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

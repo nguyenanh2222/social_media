@@ -17,7 +17,7 @@ class GroupModel(models.Model):
     noMember = models.IntegerField(db_column='noMember', blank=True, default=1)
 
     class Meta:
-        db_table = 'GROUP',
+        db_table = 'GROUP'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

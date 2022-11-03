@@ -18,7 +18,7 @@ class ActivitiesModel(models.Model):
     updatedAt = models.DateTimeField(db_column='updatedAt', default=datetime.now, blank=True, editable=False)
 
     class Meta:
-        db_table = 'ACTIVITIES',
+        db_table = 'ACTIVITIES'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),

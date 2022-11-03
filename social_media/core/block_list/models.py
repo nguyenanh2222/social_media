@@ -15,7 +15,7 @@ class BlockListModel(models.Model):
     created_at = models.DateTimeField(db_column='created_at', default=datetime.now, blank=True, editable=False)
 
     class Meta:
-        db_table = 'BLOCK_LIST',
+        db_table = 'BLOCK_LIST'
         permissions = [
             ("change_post", "Can change the post"),
             ("delete_post", "Can delete the post"),
