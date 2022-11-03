@@ -31,6 +31,9 @@ SOCIAL_MEDIA API
         create a db-router to write only to master database
                               read only from slave database
     Deploy with Gunicorn (3 concurrent workers)
+ 
+## Run
+command terminal: python3 manage.py runserver
 
 
 
