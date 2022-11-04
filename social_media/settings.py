@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'core',
-    'api'
+    'api',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
@@ -123,8 +124,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SOCIAL_MEDIA',
-        'USER': 'sa',
-        'PASSWORD': '',
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
         'HOST': 'localhost',
         'PORT': '3306',
     },
@@ -178,3 +179,13 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}

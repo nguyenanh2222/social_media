@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import update_last_login
 from django.utils.translation import gettext_lazy as _
 from rest_framework import exceptions, serializers
@@ -50,14 +49,13 @@ class TokenObtainSerializer(serializers.Serializer):
             # print(a)
             self.user = UserModel.objects.get(
                 username=authenticate_kwargs["username"],
-                # password=authenticate_kwargs["password"]
+                password=authenticate_kwargs["password"]
             )
         except UserModel.DoesNotExist: 
             raise exceptions.AuthenticationFailed(
                 self.error_messages["no_active_account"],
                 "no_active_account",
             )
-
         return {}
 
     @classmethod
