@@ -2,7 +2,7 @@ from django.utils.module_loading import import_string
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from . import serializers
+from . import token
 from .authentication import AUTH_HEADER_TYPES
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.settings import api_settings
@@ -52,7 +52,7 @@ class TokenObtainPairView(TokenViewBase):
     Takes a set of user credentials and returns an access and refresh JSON web
     token pair to prove the authentication of those credentials.
     """
-    serializer_class = serializers.TokenObtainPairSerializer
+    serializer_class = token.TokenObtainPairSerializer
 
 
 token_obtain_pair = TokenObtainPairView.as_view()
@@ -64,7 +64,7 @@ class TokenRefreshView(TokenViewBase):
     token if the refresh token is valid.
     """
 
-    _serializer_class = serializers.TokenRefreshSerializer
+    _serializer_class = token.TokenRefreshSerializer
 
 
 token_refresh = TokenRefreshView.as_view()
