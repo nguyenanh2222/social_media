@@ -2,6 +2,11 @@ from rest_framework import serializers
 from core.user.models import UserModel
 
 
+class UserSerializerCustom(serializers.Serializer):
+
+    id = serializers.IntegerField()
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel

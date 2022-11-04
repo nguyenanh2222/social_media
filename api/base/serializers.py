@@ -97,7 +97,6 @@ class TokenObtainSlidingSerializer(TokenObtainSerializer):
 
         return data
 
-
 class TokenRefreshSerializer(serializers.Serializer):
     refresh = serializers.CharField()
     access = serializers.CharField(read_only=True)

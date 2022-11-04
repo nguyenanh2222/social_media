@@ -8,7 +8,7 @@ class UserModel(AbstractBaseUser):
     password = models.CharField(db_column='password', max_length=128)
     last_login = models.DateTimeField(db_column='last_login', blank=True, null=True)
     id = models.BigAutoField(db_column='id', primary_key=True)
-    uuid = models.CharField(db_column='uuid', max_length=26, blank=False)
+    uuid = models.CharField(db_column='uuid', max_length=26, blank=False, null=True)
     firstName = models.CharField(db_column='firstName', max_length=50, blank=True, default='hello')
     lastName = models.CharField(db_column='lastName', max_length=50, blank=True, default='hello')
     username = models.CharField(db_column='username', max_length=50, blank=True, unique=True, default='')
