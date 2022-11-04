@@ -198,9 +198,11 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
         #         return request.COOKIES.get(api_settings.JWT_AUTH_COOKIE)
         #     return None
 
-        if smart_text(auth[0].lower()) != auth_header_prefix:
+        try:
+            if smart_text(auth[0].lower()) != auth_header_prefix:
+                return None
+        except IndexError:
             return None
-
         if len(auth) == 1:
             msg = _('Invalid Authorization header. No credentials provided.')
             raise exceptions.AuthenticationFailed(msg)
