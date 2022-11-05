@@ -21,7 +21,6 @@ class TokenViewBase(generics.GenericAPIView):
         """
         If serializer_class is set, use it directly. Otherwise get the class from settings.
         """
-        print(self.serializer_class)
         if self.serializer_class:
             return self.serializer_class
         try:
