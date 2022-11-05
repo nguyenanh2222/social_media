@@ -1,7 +1,7 @@
 import base64
 import binascii
 
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.middleware.csrf import CsrfViewMiddleware
 from django.utils.encoding import smart_text
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +9,7 @@ from rest_framework import HTTP_HEADER_ENCODING, exceptions
 
 import jwt
 from rest_framework_jwt.authentication import jwt_decode_handler
-from rest_framework_jwt.serializers import jwt_get_username_from_payload
+# from rest_framework_jwt.serializers import jwt_get_username_from_payload
 from rest_framework_simplejwt.settings import api_settings
 
 from core.user.models import UserModel
@@ -155,6 +155,7 @@ class BaseJSONWebTokenAuthentication(BaseAuthentication):
 
         return (user, jwt_value)
 
+    # TODO: KHI NAO ADMIN MUON TIEU DIET USER THI LAM THEM
     def authenticate_credentials(self, payload):
         """
         Returns an active user that matches the payload's user id and email.

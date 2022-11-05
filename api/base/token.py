@@ -42,7 +42,6 @@ class TokenObtainSerializer(serializers.Serializer):
         }
         try:
             authenticate_kwargs["request"] = self.context["request"]
-            print('authenticate_kwargs: ', authenticate_kwargs)
         except KeyError:
             pass
         try: 
