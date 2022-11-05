@@ -1,5 +1,5 @@
 
-## SOCIAL_MEDIA API 
+# SOCIAL_MEDIA API 
 
 # Features
 [New feed system]
@@ -19,6 +19,8 @@
     * Follow / Unfollow Users
     * Add your own bio
 * Notifications Feed showing recent likes / comments of your posts + new followers
+
+
 [Messenge system]
 * Realtime Messaging and Sending images
 
