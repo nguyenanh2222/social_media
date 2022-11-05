@@ -1,8 +1,8 @@
-# social_media
-SOCIAL_MEDIA API 
 
-## Features
-# New feed system
+## SOCIAL_MEDIA API 
+
+# Features
+[New feed system]
 * View Posts + top comment + total likes
 * Post photo/image/video posts
     * Like posts
@@ -19,16 +19,15 @@ SOCIAL_MEDIA API
     * Follow / Unfollow Users
     * Add your own bio
 * Notifications Feed showing recent likes / comments of your posts + new followers
-# Messenge system
+[Messenge system]
 * Realtime Messaging and Sending images
 
-## Rule working in git
+# Rule working in git
 * commit messs: [issu] #number of insuss [isuss name]
-
     * [setup] #1 python 3.10
     * [setup] #2 docker connect db postgresql
 
-## Requirement
+# Requirement
     * Use Django
     * DjangoRestFramework
     * Implement JWT authentication plugin
