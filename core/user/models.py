@@ -27,7 +27,7 @@ class UserModel(AbstractBaseUser):
     # objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     class Meta:
         db_table = 'USER'

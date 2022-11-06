@@ -1,6 +1,10 @@
 # social_media
 SOCIAL_MEDIA API 
 
+## Run server
+* python manage.py runserver 
+
+
 ## Features
 * New feed system
 * Post photo/image/video posts

@@ -20,6 +20,7 @@ class UserView(SocialMediaViewSet):
         manual_parameters=[],
         responses={200: openapi.Response('', UserSerializer, examples=FAKE_LIST_USER)})
     def list_user(self, request):
+        print(request.user)
         user_info = UserModel.objects.all()
         user_serializer = UserSerializer(user_info, many=True)
         return Response(data=user_serializer.data)

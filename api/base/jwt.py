@@ -54,6 +54,7 @@ class TokenObtainPairView(TokenViewBase):
     serializer_class = token.TokenObtainPairSerializer
 
 
+
 token_obtain_pair = TokenObtainPairView.as_view()
 
 
