@@ -26,6 +26,7 @@ import javax.activation.MimeType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.CacheResponse;
 import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ public class UserResource {
     private UserService userService;
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){
+
         return ResponseEntity.ok().body(userService.getUsers());
     }
     @PostMapping("/user/save")
@@ -59,68 +61,49 @@ public class UserResource {
         return ResponseEntity.ok().build();}
 
     @PostMapping("/token/refresh")
-    public String refreshToken(
+    public void refreshToken(
+            HttpServletRequest request, HttpServletResponse response,
             @RequestBody String refresh_token
-    ) {
-        System.out.println("GA KEU MEO HAY GAU");
-        return "KHONG RETURN GI CA";
+    ) throws IOException {
+        if (refresh_token != null) {
+            try {
+                java.util.Base64.Decoder decoder = java.util.Base64.getUrlDecoder();
+                String[] parts = refresh_token.split("\\."); // split out the "parts" (header, payload and signature)
+                String payloadJson = new String(decoder.decode(parts[1]));
+                String[] items = payloadJson.split("[{},:]");
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i].contains("sub")) {
+                        User user = userService.getUser(items[i + 1].substring(1, items[i + 1].length() - 1));
+                        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                        stream(user.getRoles().toArray(new Role[0])).forEach(role -> {
+                            authorities.add(new SimpleGrantedAuthority(role.toString()));
+                        });
+                        Algorithm algorithm = Algorithm.HMAC256("Secret".getBytes());
+                        String access_token = JWT.create().withSubject(user.getUsername())
+                                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                                .withIssuer(request.getRequestURL().toString())
+                                .withClaim("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                                .sign(algorithm);
+                        Map<String, String> tokens = new HashMap<>();
+                        tokens.put("access_token", access_token);
+                        tokens.put("refresh_token", refresh_token);
+                        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+                    }
+                }
+            } catch (Exception e) {
+                response.setHeader("error", e.getMessage());
+                response.setStatus(FORBIDDEN.value());
+//                    response.sendError(FORBIDDEN.value());
+                Map<String, String> error = new HashMap<>();
+                error.put("error_messenger", e.getMessage());
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+        } else {
+            throw new RuntimeException("refresh token missing");
+        }
     }
-//        System.out.println("GAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
-//
-//        System.out.println(request.getHeaders("refresh_token"));
-//
-////        response.setHeader("access_token", access_token);
-////        response.setHeader("refresh_token", refresh_token);
-//        String authorizationHeader = request.getHeader("refresh_token");
-//        System.out.println("MEO MEO MEO MEO");
-//        System.out.println(authorizationHeader);
-//        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
-//            try{
-//                System.out.println("MEOooooooooooooooooooo");
-//                String refresh_token = authorizationHeader.substring("Bearer ".length());
-//                Algorithm algorithm = Algorithm.HMAC256("Secret".getBytes());
-//                JWTVerifier verifier = JWT.require(algorithm).build();
-//                DecodedJWT decodedJWT = verifier.verify(refresh_token);
-//
-//                String username = decodedJWT.getSubject();
-//                System.out.println(username);
-//
-//                User user = userService.getUser(username);
-//                System.out.println(username);
-//
-//                Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//                stream(user.getRoles().toArray(new Role[0])).forEach(role -> {
-//                    authorities.add(new SimpleGrantedAuthority(role.toString()));
-//                });
-//
-//                System.out.println("MMMMMMMMMMMMMMMEOMEO");
-//                System.out.println(authorities);
-//
-//                String access_token = JWT.create().withSubject(user.getUsername())
-//                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
-//                        .withIssuer(request.getRequestURL().toString())
-//                        .withClaim("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-//                        .sign(algorithm);
-//
-////        response.setHeader("access_token", access_token);
-////        response.setHeader("refresh_token", refresh_token);
-//                Map<String, String> tokens = new HashMap<>();
-//                tokens.put("access_token", access_token);
-//                tokens.put("refresh_token", refresh_token);
-//                new ObjectMapper().writeValue(response.getOutputStream(),tokens);
-//            }catch (Exception e) {
-//                response.setHeader("error", e.getMessage());
-//                response.setStatus(FORBIDDEN.value());
-////                    response.sendError(FORBIDDEN.value());
-//                Map<String, String> error = new HashMap<>();
-//                error.put("error_messenger", e.getMessage());
-//                response.setContentType(APPLICATION_JSON_VALUE);
-//                new ObjectMapper().writeValue(response.getOutputStream(),error);
-//            }
-//        }else {
-//            throw new RuntimeException("refresh token missing");
-//        }
-    }
+}
     @Data
     class RoleToUserForm{
         private String username;

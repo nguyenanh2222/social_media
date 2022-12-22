@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
+//-classpath /home/anh/Desktop/repo/respository/java/auth/target/classes
 @SpringBootApplication
 public class AuthApplication {
 
